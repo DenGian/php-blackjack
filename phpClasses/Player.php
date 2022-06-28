@@ -23,9 +23,9 @@ if ($this->getScore()>$this->noGodHere){
 }
     }
 
-    public function surrender(): bool
+    public function surrender(): void
     {
-return $this->lost=true;
+    $this->lost=true;
     }
 
     public function getScore(): int
@@ -38,7 +38,7 @@ return $this->lost=true;
 
     public function hasLost(): bool
     {
-        // "this" gets replaced by variable by function its called upon
+        // "this" refers to the object made by the class
 return $this->lost;
     }
 }
