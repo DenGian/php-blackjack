@@ -11,8 +11,8 @@ public function __construct()
 {
 $this->deck = new deck();
 $this->deck->shuffle();
-$this->player= new player();
-$this->dealer= new player();
+$this->player= new player($this->deck);
+$this->dealer= new player($this->deck);
 }
 public function getPlayer(): object
 {

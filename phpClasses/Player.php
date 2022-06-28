@@ -15,7 +15,7 @@ class Player
         $this->cards[] = $deck->drawCard();
     }
 
-    public function hit(): void
+    public function hit($deck): void
     {
 $this->cards[]+= $deck->drawCard();
 if ($this->getScore()>$this->noGodHere){

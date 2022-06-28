@@ -9,9 +9,9 @@ require 'phpClasses/Deck.php';
 require 'phpClasses/Player.php';
 require 'phpClasses/Blackjack.php';
 
-if (!$_SESSION["blackjack"]){
+if (empty($_SESSION['blackjack'])){ // note: for some reason "!" doesnt work, dkw tho
 $blackjack = new blackjack();
-    $_SESSION["blackjack"]=$blackjack;
+    $_SESSION['blackjack']=$blackjack;
 }
 
 
