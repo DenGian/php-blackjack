@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-require 'Deck.php';
-
 class Player
 {
     private array $cards/*=[]*/; // if empty array is necessary
@@ -25,9 +23,9 @@ if ($this->getScore()>$this->noGodHere){
 }
     }
 
-    public function surrender(): string
+    public function surrender(): bool
     {
-
+return $this->lost=true;
     }
 
     public function getScore(): int

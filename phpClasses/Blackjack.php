@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-require 'Player.php';
 class Blackjack
 {
 private object $player;
