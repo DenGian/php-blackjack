@@ -17,7 +17,7 @@ class Player
 
     public function hit($deck): void
     {
-$this->cards[]+= $deck->drawCard();
+$this->cards[] = $deck->drawCard();
 if ($this->getScore()>$this->noGodHere){
     $this->surrender();
 }
@@ -30,8 +30,9 @@ if ($this->getScore()>$this->noGodHere){
 
     public function getScore(): int
     {
-        for ($i = 0; $i <= count($this->cards); $i++) {
-            $score += $this->cards[$i]->getRawValue();
+        $score = 0;
+        for ($i = 0; $i < count($this->cards); $i++) {
+            $score += $this->cards[$i]->getValue();
         }
         return $score;
     }

@@ -16,14 +16,14 @@ $this->dealer= new dealer($this->deck);
 }
 public function getPlayer(): object
 {
-
+return $this->player;
 }
 public function getDealer(): object
 {
-
+    return $this->dealer;
 }
 public function getDeck(): object
 {
-
+return $this->deck;
 }
 }

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-session_start();
 
 require 'phpClasses/Suit.php';
 require 'phpClasses/Card.php';
@@ -9,6 +8,8 @@ require 'phpClasses/Deck.php';
 require 'phpClasses/Player.php';
 require 'phpClasses/Blackjack.php';
 require 'phpClasses/Dealer.php';
+
+session_start();
 
 if (!isset($_SESSION['blackjack'])) {
     $blackjack = new blackjack();
@@ -19,7 +20,9 @@ if (!isset($_SESSION['blackjack'])) {
 
 // hit button
 if (isset($_POST['hit'])) {
-    echo 'Dont like this one';
+    if($blackjack->getPlayer()->hasLost() === false){
+        $blackjack->getPlayer()->hit($blackjack->getDeck());
+    }
 }
 
 // stand button
@@ -65,5 +68,12 @@ if (isset($_POST['surrender'])) // [] key
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+<!--<div class="alert alert-success" role="alert">-->
+<!--    Average-->
+<!--</div>-->
+<!--<div class="alert alert-danger" role="alert">-->
+<!--    You scrub-->
+<!--</div>-->
 </body>
 </html>
