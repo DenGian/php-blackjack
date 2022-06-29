@@ -9,10 +9,7 @@ private object $deck;
 
 public function __construct()
 {
-$this->deck = new deck();
-$this->deck->shuffle();
-$this->player= new player($this->deck);
-$this->dealer= new dealer($this->deck);
+$this->start();
 }
 public function getPlayer(): object
 {
@@ -25,5 +22,12 @@ public function getDealer(): object
 public function getDeck(): object
 {
 return $this->deck;
+}
+public function start(): void
+{
+    $this->deck = new deck();
+    $this->deck->shuffle();
+    $this->player= new player($this->deck);
+    $this->dealer= new dealer($this->deck);
 }
 }

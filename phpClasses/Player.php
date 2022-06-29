@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 class Player
 {
-    private array $cards/*=[]*/; // if empty array is necessary
+    protected array $cards/*=[]*/; // if empty array is necessary
     private bool $lost = false;
     private int $noGodHere = 21;
 
@@ -41,5 +41,10 @@ if ($this->getScore()>$this->noGodHere){
     {
         // "this" refers to the object made by the class
 return $this->lost;
+    }
+
+    public function getCards(): array
+    {
+        return $this->cards;
     }
 }
