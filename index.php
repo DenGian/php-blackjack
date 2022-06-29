@@ -27,16 +27,15 @@ if (isset($_POST['hit'])) {
 
 // stand button
 if (isset($_POST['stand'])) {
-    // nested if statement
-    if ($blackjack->getDealer()->hasLost() === false) {
-        $blackjack->getDealer()->hit($blackjack->getDeck());
-        var_dump($blackjack->getDealer()->getCards());
-    } else {
-        $blackjack->start();
+
+} // nested if statement
+elseif ($blackjack->getDealer()->hasLost() === false) {
+    $blackjack->getDealer()->hit($blackjack->getDeck());
+} else {
+    $blackjack->start();
 //        unset($_SESSION['blackjack']);
 //        $blackjack = new blackjack();
 //        $_SESSION['blackjack'] = $blackjack;
-    }
 }
 
 // surrender button
@@ -47,10 +46,28 @@ if (isset($_POST['surrender'])) // [] key
 //    $blackjack = new blackjack();
 //    $_SESSION['blackjack'] = $blackjack;
 }
-if (isset($_POST['restart'])){
+if (isset($_POST['restart'])) {
     $blackjack->start();
 }
 
+if ($blackjack->getPlayer()->hasLost() === true) {
+    echo '<div class="alert alert-danger" role = "alert" >';
+    echo 'You scrub';
+    echo '</div >';
+} else if ($blackjack->getDealer()->hasLost() === true) {
+    echo '<div class="alert alert-success" role="alert">';
+    echo 'Average';
+    echo '</div>';
+
+} else if ($blackjack->getPlayer()->getScore() < $blackjack->getDealer()->getScore()) {
+    echo '<div class="alert alert-danger" role = "alert" >';
+    echo 'You scrub';
+    echo '</div >';
+} else {
+    echo '<div class="alert alert-success" role="alert">';
+    echo 'Average';
+    echo '</div>';
+}
 ?>
 
 <html lang="en">
@@ -64,37 +81,39 @@ if (isset($_POST['restart'])){
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<?php
-if ($blackjack->getPlayer()->hasLost() === true) {
-    echo '<div class="alert alert-danger" role = "alert" >';
-    echo 'You scrub';
-    echo '</div >';
-}
-else if ($blackjack->getDealer()->hasLost() === true) {
-    echo '<div class="alert alert-success" role="alert">';
-    echo 'Average';
-    echo '</div>';
-
-}else if($blackjack->getPlayer()->getScore()<$blackjack->getDealer()->getScore()){
-    echo '<div class="alert alert-danger" role = "alert" >';
-    echo 'You scrub';
-    echo '</div >';
-} else{
-    echo '<div class="alert alert-success" role="alert">';
-    echo 'Average';
-    echo '</div>';
-}?>
-<?php foreach ($blackjack->getPlayer()->getCards() as $card): ?>
-<div style="text-align:center; font-size:100px;" class="row card col-lg-3">
-    <?= $card->getUnicodeCharacter(true); ?>
-</div>
-<?php endforeach; ?>
-<?php foreach ($blackjack->getDealer()->getCards() as $card): ?>
-    <div style="text-align:center; font-size:100px;" class="row card col-lg-3">
-        <?= $card->getUnicodeCharacter(true); ?>
+<div class="container">
+<div class="row">
+    <div class="col-lg-1">
+        <p>
+            Player
+        </p>
+        <?php
+        echo $blackjack->getPlayer()->getScore();
+        ?>
     </div>
-<?php endforeach; ?>
-?>
+    <?php
+    foreach ($blackjack->getPlayer()->getCards() as $card): ?>
+        <div style="text-align:center; font-size:100px;" class=" card col-lg-2">
+            <?= $card->getUnicodeCharacter(true); ?>
+        </div>
+    <?php endforeach; ?>
+</div>
+<div class="row">
+    <div class="col-lg-1">
+        <p>
+            Dealer
+        </p>
+        <?php
+        echo $blackjack->getDealer()->getScore();
+        ?>
+    </div>
+    <?php foreach ($blackjack->getDealer()->getCards() as $card): ?>
+        <div style="text-align:center; font-size:100px;" class=" card col-lg-2">
+            <?= $card->getUnicodeCharacter(true); ?>
+        </div>
+    <?php endforeach; ?>
+</div>
+</div>
 <form method="post">
     <button type="submit" class="btn btn-warning" name="hit">Hit</button>
     <button type="submit" class="btn btn-success" name="stand">Stand</button>

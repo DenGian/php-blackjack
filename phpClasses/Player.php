@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 class Player
 {
-    protected array $cards/*=[]*/; // if empty array is necessary
+    protected array $cards/*=[]*/
+    ; // if empty array is necessary
     private bool $lost = false;
     private int $noGodHere = 21;
 
@@ -17,15 +18,15 @@ class Player
 
     public function hit($deck): void
     {
-$this->cards[] = $deck->drawCard();
-if ($this->getScore()>$this->noGodHere){
-    $this->surrender();
-}
+        $this->cards[] = $deck->drawCard();
+        if ($this->getScore() > $this->noGodHere) {
+            $this->surrender();
+        }
     }
 
     public function surrender(): void
     {
-    $this->lost=true;
+        $this->lost = true;
     }
 
     public function getScore(): int
@@ -40,7 +41,8 @@ if ($this->getScore()>$this->noGodHere){
     public function hasLost(): bool
     {
         // "this" refers to the object made by the class
-return $this->lost;
+        return $this->lost;
+
     }
 
     public function getCards(): array
